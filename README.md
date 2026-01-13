@@ -1,25 +1,21 @@
 ****************
-* Project number/name
-* Class
-* Date
-* Your name
+* Warmup / MagicSquares
+* CS 221
+* 1/12/26
+* Kellan Carrillo
 **************** 
 
 OVERVIEW:
 
- Concisely explain what the program does. If this exceeds a couple
- of sentences, you're going too far. The details go in other
- sections.
+ MagicSquare uses the command line to allow the user to select if they want to check
 
 
 INCLUDED FILES:
 
- List the files required for the project with a brief
- explanation of why each is included.
-
- e.g.
- * Class1.java - source file
- * Class2.java - source file
+ * MagicSquare.java - Implements MagicSquareInterface
+ * MagicSquareInterface.java - source file
+ * MagicSquareDriver.java - Driver class
+ * MagicSquareTester.java - Tester
  * README - this file
 
 
