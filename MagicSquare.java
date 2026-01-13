@@ -56,6 +56,7 @@ public class MagicSquare implements MagicSquareInterface{
 
          throw new UnsupportedOperationException("Unimplemented method 'toString'");
     }
+    
 
 }
 
