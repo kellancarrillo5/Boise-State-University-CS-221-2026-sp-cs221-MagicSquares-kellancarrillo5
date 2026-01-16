@@ -1,70 +1,77 @@
 /**
- * Driver class for Magic Square
+ * Driver class for Magic Square, 
  * 
  * @author kellancarrillo5
  */
 
 public class MagicSquareDriver {
-    // instance variables
-    private String selectedOption;
-    private int givenSize;
-    private String fileName;
-    private int[][] magicSquare;
-    private int row;
-    private int col;
-
     public static void main(String[] args) {
-         //display to the command line the selections avaliable, -check or -create
-        System.out.println("java MagicSquareDriver <-check | -create> <filename> < |size>");
-         
-        //if command line == 2 arguements (-check)
-        if(args.length == 2){
+        //instance variables
+        String flag = args[0];
+        String fileName = args[1];
+        int size = Integer.parseInt(args[2]);
 
+        //validate arguements, if there is nothing or to much typed we will display the usage explaining what commands to type
+        if(args.length < 2 || args.length > 3){
+            printUsage();
+            return; 
         }
-        
-        //if command line has 3 arguments (-create)
 
-        /**
-        * Constructor to create a magic square
-        * @param fileName : input fileName 
-        * @param givenSize : set col/row size of the 2D magicSquare
-        */
-        public MagicSquare(String fileName, int givenSize){
-            //initialize instance variables 
-            this.givenSize = parseInt(args[3]);
-            magicSquare = new int[givenSize][givenSize];
-            this.row = givenSize - 1; 
-            this.col = givenSize / 2;
+        try{
+            /////////
+            //CHECK//
+            /////////
+            if(flag.equals("-check")){
+                if(args.length != 2){ //must have the file name
+                    printUsage();
+                    return;
+                }
+            
 
+            //Read and check the magic square from the file
+            MagicSquare square = new MagicSquare(fileName);
+            System.out.println(square.toString());
             
-            this.fileName = args[1];
-            this.selectedOption = args[0];
-            
-            //check that size is an odd positive integer (size is not the magic number its length for 2D array)
-            if(givenSize / 2 == 0 || givenSize < 0){
-                System.out.println("Selected size must be an odd positive integer, try again.");
-            } else {
-            //printwriter?
+            //////////
+            //CREATE//
+            //////////              
+            }else if(flag.equals("-create")){
+                if(args.length != 3){ //must have the filename and size
+                    printUsage();
+                    return;
+                }
+                try{
+                    fileName = args[1];
+                    size = Integer.parseInt(args[2]);
+                } catch (numberFormatException e){
+
+                }
+                if(size <= 0 || size % 2 == 0){
+                    System.out.println("Size must be an odd, positive integer!");
+                    printUsage();
+                    return;
+                } 
+                MagicSquare square = new MagicSquare(fileName, size);
+                System.out.println(square.toString());
             }
+        
         }
-
-        /**
-        * Constructor to check if a file is a valid magic square
-        * @param fileName : input fileName
-        */
-        public MagicSquare(fileName){
-            //update instance varibales
-            //
-        }
-
-        return;
-        }
-
     }
 
+    /**
+     * 
+     */
+    private static void printUsage(){
+        System.out.println("Usage:");
+        //display to the command line the selections avaliable, -check or -create
+        System.out.println("java MagicSquareDriver <-check | -create> <filename> < |size>");
+        System.out.println("java -check <filename>     will check if a file contains a magic square");
+        System.out.println("java -create <filename <size>     will create a file with the name provided and create a magic square of a given odd, positive size.");
 
-    // new int file made
+    }
+}
 
-    // scanner for command line, look for -check and -create
-
-    // Method to check if the
+    
+         
+       
+           
