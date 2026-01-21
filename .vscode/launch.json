@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "MagicSquaresTest",
+            "request": "launch",
+            "mainClass": "MagicSquaresTest",
+            "projectName": "Boise-State-University-CS-221-2026-sp-cs221-MagicSquares-kellancarrillo5_12322ebd"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

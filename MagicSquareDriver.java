@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  * Driver class for Magic Square, 
  * 
@@ -6,60 +9,70 @@
 
 public class MagicSquareDriver {
     public static void main(String[] args) {
-        //instance variables
-        String flag = args[0];
-        String fileName = args[1];
-        int size = Integer.parseInt(args[2]);
-
+       
         //validate arguements, if there is nothing or to much typed we will display the usage explaining what commands to type
         if(args.length < 2 || args.length > 3){
             printUsage();
             return; 
         }
 
-        try{
-            /////////
-            //CHECK//
-            /////////
-            if(flag.equals("-check")){
-                if(args.length != 2){ //must have the file name
-                    printUsage();
-                    return;
-                }
-            
+        String flag = args[0];
+        String fileName = args[1];
 
-            //Read and check the magic square from the file
-            MagicSquare square = new MagicSquare(fileName);
-            System.out.println(square.toString());
-            
-            //////////
-            //CREATE//
-            //////////              
-            }else if(flag.equals("-create")){
-                if(args.length != 3){ //must have the filename and size
-                    printUsage();
-                    return;
-                }
-                try{
-                    fileName = args[1];
-                    size = Integer.parseInt(args[2]);
-                } catch (numberFormatException e){
-
-                }
-                if(size <= 0 || size % 2 == 0){
-                    System.out.println("Size must be an odd, positive integer!");
-                    printUsage();
-                    return;
-                } 
-                MagicSquare square = new MagicSquare(fileName, size);
-                System.out.println(square.toString());
+        /////////
+        //CHECK//
+        /////////
+        if(flag.equals("-check")){
+            if(args.length != 2){ //must have two arguements
+                System.out.println("Error: -check flag requires exactly 2 arguments.");
+                printUsage();
+                return;
             }
-        
+
+            try{           
+                //Read and check the magic square from the file
+                MagicSquare square = new MagicSquare(fileName);
+                System.out.println(square.toString());
+            } catch(FileNotFoundException e){
+                //if the file is not found notify the user
+                System.out.println("Error: File '" + fileName + "' not found or cannot be opened.");
+                System.out.println("Make sure the file exists and is in the correct format.");
+            }
         }
-    }
+            
+        //////////
+        //CREATE//
+        //////////              
+        else if(flag.equals("-create")){
+            if(args.length != 3){ //if it doesn't have the correct amount of arguments
+                System.out.println("Error: -create flag requires exactly 3 arguments.");
+                printUsage();
+                return;
+            }
+                try{
+                    int size = Integer.parseInt(args[2]);
+
+                    //check if size is valid
+                    if(size <= 0 || size % 2 == 0){
+                        System.out.println("Size must be an odd, positive integer!");
+                        printUsage();
+                        return;
+                    } 
+                    MagicSquare square = new MagicSquare(fileName, size);
+                    System.out.println(square.toString());                    
+                } catch (NumberFormatException e){
+                    System.out.println("Error: Size must be a valid integer.");
+               //} catch (IOException e){
+               //    System.out.println("Error: Issue writing to file");
+               }
+        } else {
+            printUsage();
+        }
+
+      }
 
     /**
-     * 
+     * Prints incorrect usage
      */
     private static void printUsage(){
         System.out.println("Usage:");
