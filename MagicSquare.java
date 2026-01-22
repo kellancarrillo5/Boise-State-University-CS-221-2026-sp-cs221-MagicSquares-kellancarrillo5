@@ -48,22 +48,22 @@ public class MagicSquare implements MagicSquareInterface{
         int [][] currentMatrix = new int[matrixSize][matrixSize];
 
         for (int i = 0; i < matrixSize; i++){
-             	if (!scnr.hasNextLine()){ //make sure the file has the correct amount of columns 
-                   	throw new FileNotFoundException("Invalid file format");
-             	}
+            if (!scnr.hasNextLine()){ //make sure the file has the correct amount of columns 
+               	throw new FileNotFoundException("Invalid file format");
+            }
 
-             	Scanner scanner = new Scanner(scnr.nextLine());
+            Scanner scanner = new Scanner(scnr.nextLine());
 
-             	for (int j = 0; j < matrixSize; j++){
-                   	if (!scanner.hasNextInt()){//make sure the file has the correct amount of rows
-                        throw new FileNotFoundException("Invalid file format");
-                   	}
-                   	currentMatrix[i][j] = scanner.nextInt();
-             	}
-                scnr.close();
-                scanner.close();
-        	}
-        	return currentMatrix;
+            for (int j = 0; j < matrixSize; j++){
+                if (!scanner.hasNextInt()){//make sure the file has the correct amount of rows
+                    throw new FileNotFoundException("Invalid file format");
+                }
+                currentMatrix[i][j] = scanner.nextInt();
+            }  
+            scanner.close();
+        }
+        scnr.close();
+        return currentMatrix;
   	}
 
 
