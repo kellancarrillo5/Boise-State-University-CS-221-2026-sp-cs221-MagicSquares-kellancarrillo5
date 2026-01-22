@@ -13,9 +13,9 @@ OVERVIEW:
 INCLUDED FILES:
 
  * MagicSquare.java - Implements MagicSquareInterface
- * MagicSquareInterface.java - source file
- * MagicSquareDriver.java - Driver class
- * MagicSquareTester.java - Tester
+ * MagicSquareInterface.java - source file contaning the methods implemented in MagicSquare.java
+ * MagicSquareDriver.java - Driver class, taking in 
+ * MagicSquareTester.java - Tester made by our instructor
  * README - this file
 
 
@@ -34,10 +34,10 @@ COMPILING AND RUNNING:
  e.g.
  From the directory containing all source files, compile the
  driver class (and all dependencies) with the command:
- $ javac Class1.java
+ $ javac MagicSquareDriver.java
 
  Run the compiled class file with the command:
- $ java Class1
+ $ java MagicSquareDriver
 
  Console output will give the results after the program finishes.
 

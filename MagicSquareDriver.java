@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 
 public class MagicSquareDriver {
-    public static void main(String[] args) {
+    public static void main(String[] args){
        
         //validate arguements, if there is nothing or to much typed we will display the usage explaining what commands to type
         if(args.length < 2 || args.length > 3){
@@ -49,37 +49,38 @@ public class MagicSquareDriver {
                 printUsage();
                 return;
             }
-                try{
-                    int size = Integer.parseInt(args[2]);
+            try{
+                int size = Integer.parseInt(args[2]);
 
-                    //check if size is valid
-                    if(size <= 0 || size % 2 == 0){
-                        System.out.println("Size must be an odd, positive integer!");
-                        printUsage();
-                        return;
+                //check if size is valid
+                if(size <= 0 || size % 2 == 0){
+                    System.out.println("Size must be an odd, positive integer!");
+                    printUsage();
+                    return;
                     } 
-                    MagicSquare square = new MagicSquare(fileName, size);
-                    System.out.println(square.toString());                    
+                //create the new magic square and print to string   
+                MagicSquare square = new MagicSquare(fileName, size);
+                System.out.println(square.toString());
+
                 } catch (NumberFormatException e){
                     System.out.println("Error: Size must be a valid integer.");
-               //} catch (IOException e){
-               //    System.out.println("Error: Issue writing to file");
+                } catch (IOException e){
+                  System.out.println("Error: Issue writing to file");
                }
         } else {
             printUsage();
         }
-
       }
 
     /**
-     * Prints incorrect usage
+     * Prints for incorrect command line input
      */
     private static void printUsage(){
         System.out.println("Usage:");
-        //display to the command line the selections avaliable, -check or -create
+        //display to the command line how to correctly use -check and -create
         System.out.println("java MagicSquareDriver <-check | -create> <filename> < |size>");
-        System.out.println("java -check <filename>     will check if a file contains a magic square");
-        System.out.println("java -create <filename <size>     will create a file with the name provided and create a magic square of a given odd, positive size.");
+        System.out.println("java MagicSquareDriver -check <filename>     will check if a file contains a magic square");
+        System.out.println("java MagicSquareDriver -create <filename <size>     will create a file with the name provided and create a magic square of a given odd, positive size.");
 
     }
 }

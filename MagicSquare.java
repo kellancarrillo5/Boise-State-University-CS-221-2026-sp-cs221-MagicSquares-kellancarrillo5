@@ -12,51 +12,56 @@ import java.util.Scanner;
 
 public class MagicSquare implements MagicSquareInterface{
     private int[][] matrix;
-    private boolean isValid;
 
     /**
-     * Constructor to read a file
+     * Constructor to read a file for the -check flag in the driver class
      * @param fileName
      */
     public MagicSquare(String fileName)throws FileNotFoundException {
         this.matrix = readMatrix(fileName);
-        isValid = isMagicSquare();
     }
 
     /**
-     * Constructor to read and write a file
+     * Constructor for the -create flag in the driver class, generatign a magic square and writing the matrix
      * @param fileName
      * @param dimension
      * @throws IOException 
      */
     public MagicSquare(String fileName, int dimension) throws IOException{
-        this.matrix = matrix; 
+        this.matrix = generateMagicSquare(dimension);
         writeMatrix(matrix, fileName);  
-        isValid = isMagicSquare();    
-
     }
 
+    /**
+     * Reads the matrix from the fileName input
+     * @param fileName
+     * @return
+     * @throws FileNotFoundException
+     */
     private int[][] readMatrix(String fileName) throws FileNotFoundException {
+        //create a scanner for the fileName given
         File file = new File(fileName);
         Scanner scnr = new Scanner(file);
+
+        //get the size from the first number in the file 
         int matrixSize = Integer.parseInt(scnr.nextLine().trim());
         int [][] currentMatrix = new int[matrixSize][matrixSize];
 
-        for (int i = 0; i < matrixSize; i++)
-        	{
-             	if (!scnr.hasNextLine())
-             	{
+        for (int i = 0; i < matrixSize; i++){
+             	if (!scnr.hasNextLine()){ //make sure the file has the correct amount of columns 
                    	throw new FileNotFoundException("Invalid file format");
              	}
+
              	Scanner scanner = new Scanner(scnr.nextLine());
-             	for (int j = 0; j < matrixSize; j++)
-             	{
-                   	if (!scanner.hasNextInt())
-                   	{	
-                        	throw new FileNotFoundException("Invalid file format");
+
+             	for (int j = 0; j < matrixSize; j++){
+                   	if (!scanner.hasNextInt()){//make sure the file has the correct amount of rows
+                        throw new FileNotFoundException("Invalid file format");
                    	}
                    	currentMatrix[i][j] = scanner.nextInt();
              	}
+                scnr.close();
+                scanner.close();
         	}
         	return currentMatrix;
   	}
@@ -73,115 +78,99 @@ public class MagicSquare implements MagicSquareInterface{
         PrintWriter outFile = new PrintWriter(new FileWriter(fileName));
         int n = matrix.length;
         outFile.println(n);
-            for (int[] row : matrix)
-        	    {
-             	    for (int val : row)
-             	{
+            for (int[] row : matrix){
+             	for (int val : row){
                    	outFile.print(val + " ");
              	}
              	outFile.println();
         	}
         	outFile.close();
         }
-    
+    /**
+     * Generates a magic square with the provided int n
+     * @param n
+     * @return
+     */
     public static int[][] generateMagicSquare(int n){
         int[][] magicSquare = new int[n][n];
-        	int num = 1;
-        	int row = n - 1;
-        	int col = n / 2;
-        	int oldRow;
-        	int oldCol;
+        int num = 1;
+        int row = n - 1;
+        int col = n / 2;
+        int oldRow;
+        int oldCol;
 
-        	while (num <= n * n)
-        	{
-             	magicSquare[row][col] = num++;
-             	oldRow = row;
-             	oldCol = col;
-             	row++;
-             	col++;
-             	if (row == n)
-             	{
-                   	row = 0;
-             	}
-             	if (col == n)
-             	{
-                   	col = 0;
-             	}
-             	if (magicSquare[row][col] != 0)
-             	{
-                   	row = oldRow - 1;
-                   	col = oldCol;
-             	}
+        while (num <= n * n){
+            magicSquare[row][col] = num++;
+            oldRow = row;
+            oldCol = col;
+            row++;
+            col++;
+            if (row == n){
+                row = 0;
+            }if (col == n){
+                col = 0;
+            }if (magicSquare[row][col] != 0){
+                row = oldRow - 1;
+                col = oldCol;
+                }
         	}
         	return magicSquare;
 
     }
     
 
-
-
     @Override
     public boolean isMagicSquare(){
-          if (matrix == null || matrix.length == 0 || matrix.length != matrix[0].length) {
-            return false;
-        }
-
         int n = matrix.length;
-        int magicConstant = n * (n * n + 1) / 2;
+        int magicConstant = n * (n * n + 1) / 2;    
 
         // Check all numbers 1..n^2 appear exactly once
         boolean[] seen = new boolean[n * n + 1];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                int val = matrix[i][j];
-                if (val < 1 || val > n * n || seen[val]) {
+        for (int[] row : matrix){
+            for (int num : row){
+                if (num < 1 || num > n * n || seen[num]){
                     return false;
                 }
-                seen[val] = true;
-            }
-        }
+                    seen[num] = true;
+             	}
+        	}
 
-        // Check rows and columns
-        for (int i = 0; i < n; i++) {
-            int rowSum = 0;
-            int colSum = 0;
-
-            for (int j = 0; j < n; j++) {
-                rowSum += matrix[i][j];
-                colSum += matrix[j][i];
-            }
-
-            if (rowSum != magicConstant || colSum != magicConstant) {
+        for (int[] row : matrix){
+            int sum = 0;
+            for (int num : row){
+                sum += num;
+                }
+            if (sum != magicConstant){
                 return false;
-            }
-        }
+             	}
+        	}
 
-        // Check main diagonal
-        int diag1 = 0;
-        for (int i = 0; i < n; i++) {
-            diag1 += matrix[i][i];
-        }
-        if (diag1 != magicConstant) {
-            return false;
-        }
+        	for (int col = 0; col < n; col++)
+        	{
+             	int sum = 0;
+             	for (int row = 0; row < n; row++)
+             	{
+                   	sum += matrix[row][col];
+             	}
+             	if (sum != magicConstant)
+             	{
+                   	return false;
+             	}
+        	}
 
-        // Check secondary diagonal
-        int diag2 = 0;
-        for (int i = 0; i < n; i++) {
-            diag2 += matrix[i][n - 1 - i];
-        }
-        if (diag2 != magicConstant) {
-            return false;
-        }
+        	int rightDiagonal = 0;
+        	int leftDiagonal = 0;
+        	for (int i = 0; i < n; i++)
+        	{
+             	rightDiagonal += matrix[i][i];
+             	leftDiagonal += matrix[i][n - i - 1];
+        	}
 
-        return true;
-    }
-
+        	return rightDiagonal == magicConstant && leftDiagonal == magicConstant;
+        }
 
     @Override
     public int[][] getMatrix() {
-        //read from file or generated
-        // create a new board that will return the current copy
         int n = matrix.length;
         int[][] copy = new int[n][n];
 
@@ -197,13 +186,6 @@ public class MagicSquare implements MagicSquareInterface{
     
     @Override
     public String toString(){
-        //Display formatted statement
-        // The matrix:
-	    // 16 3 2 13
-	    // 5 10 11 8
-	    // 9 6 7 12
-	    // 4 15 14 1
-        // is a magic square.
 
         String displayString = "The matrix: \n";
         
