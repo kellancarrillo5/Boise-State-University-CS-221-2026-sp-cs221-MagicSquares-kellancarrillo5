@@ -55,8 +55,8 @@ TESTING:
 
 
 Scenarios being tested in MagicSquareTest included:
-	Three incorrect files to check 
-	Three correct files to check
+	Four incorrect files to check 
+	Four correct files to check
 	All methods inherited from MagicSquareInterface
     Handling exceptions being thrown
 	
