@@ -6,11 +6,12 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 /**
- * Implements MagicSquareInterface
+ * Implements MagicSquareInterface to read, create, evaluate and display a magic square
+ * 
  * @author kellancarrillo5
  */
-
 public class MagicSquare implements MagicSquareInterface{
+    //instance variables
     private int[][] matrix;
 
     /**
@@ -44,18 +45,21 @@ public class MagicSquare implements MagicSquareInterface{
         Scanner scnr = new Scanner(file);
 
         //get the size from the first number in the file 
-        int matrixSize = Integer.parseInt(scnr.nextLine().trim());
-        int [][] currentMatrix = new int[matrixSize][matrixSize];
+        int n = Integer.parseInt(scnr.nextLine().trim());
+        int[][] currentMatrix = new int[n][n];
 
-        for (int i = 0; i < matrixSize; i++){
+        for (int i = 0; i < n; i++){
             if (!scnr.hasNextLine()){ //make sure the file has the correct amount of columns 
+                scnr.close();
                	throw new FileNotFoundException("Invalid file format");
             }
 
             Scanner scanner = new Scanner(scnr.nextLine());
 
-            for (int j = 0; j < matrixSize; j++){
-                if (!scanner.hasNextInt()){//make sure the file has the correct amount of rows
+            for (int j = 0; j < n; j++){
+                if (!scanner.hasNextInt()){ //make sure the file has the correct amount of rows
+                    scanner.close();
+                    scnr.close();
                     throw new FileNotFoundException("Invalid file format");
                 }
                 currentMatrix[i][j] = scanner.nextInt();
@@ -69,23 +73,28 @@ public class MagicSquare implements MagicSquareInterface{
 
 
     /**
-     * writes a matrix to a file
+     * Writes a matrix to the generated file
      * @param matrix
-     * @param fileName
+     * @param fileName 
      * @throws IOException
      */
     public static void writeMatrix(int[][] matrix, String fileName) throws IOException{
         PrintWriter outFile = new PrintWriter(new FileWriter(fileName));
         int n = matrix.length;
+
+        //add the size of the matrix, n, first
         outFile.println(n);
-            for (int[] row : matrix){
-             	for (int val : row){
-                   	outFile.print(val + " ");
-             	}
-             	outFile.println();
-        	}
-        	outFile.close();
+
+        for(int[] row : matrix){
+         	for(int val : row){
+                outFile.print(val + " ");
+            }
+            //once the row ends go to the next line
+            outFile.println();
         }
+        outFile.close();
+    }
+
     /**
      * Generates a magic square with the provided int n
      * @param n
@@ -124,7 +133,7 @@ public class MagicSquare implements MagicSquareInterface{
         int n = matrix.length;
         int magicConstant = n * (n * n + 1) / 2;    
 
-        // Check all numbers 1..n^2 appear exactly once
+        //Make sure all numbers 1..n^2 appear exactly once
         boolean[] seen = new boolean[n * n + 1];
         for (int[] row : matrix){
             for (int num : row){
@@ -133,41 +142,37 @@ public class MagicSquare implements MagicSquareInterface{
                 }
                     seen[num] = true;
              	}
-        	}
+        }
 
         for (int[] row : matrix){
             int sum = 0;
-            for (int num : row){
+            for (int num : row){ //add each number into the row to the sum
                 sum += num;
-                }
-            if (sum != magicConstant){
+            }
+            if (sum != magicConstant){ //check if is equal to the magic constant
                 return false;
              	}
-        	}
-
-        	for (int col = 0; col < n; col++)
-        	{
-             	int sum = 0;
-             	for (int row = 0; row < n; row++)
-             	{
-                   	sum += matrix[row][col];
-             	}
-             	if (sum != magicConstant)
-             	{
-                   	return false;
-             	}
-        	}
-
-        	int rightDiagonal = 0;
-        	int leftDiagonal = 0;
-        	for (int i = 0; i < n; i++)
-        	{
-             	rightDiagonal += matrix[i][i];
-             	leftDiagonal += matrix[i][n - i - 1];
-        	}
-
-        	return rightDiagonal == magicConstant && leftDiagonal == magicConstant;
         }
+
+       	for (int col = 0; col < n; col++){
+            int sum = 0;
+            for (int row = 0; row < n; row++){
+                sum += matrix[row][col];
+            }
+            if (sum != magicConstant){
+                return false;
+            }
+        }
+
+        int rightDiagonal = 0;
+        int leftDiagonal = 0;
+        for (int i = 0; i < n; i++){
+            rightDiagonal += matrix[i][i];
+            leftDiagonal += matrix[i][n - i - 1];
+        }
+
+        return rightDiagonal == magicConstant && leftDiagonal == magicConstant;
+    }
 
     @Override
     public int[][] getMatrix() {
@@ -186,19 +191,19 @@ public class MagicSquare implements MagicSquareInterface{
     
     @Override
     public String toString(){
-
         String displayString = "The matrix: \n";
         
         // Add matrix with formatting 
-        for (int i = 0; i < matrix.length; i++) {
-            displayString += "\t";
+        for (int i = 0; i < matrix.length; i++){
+            //tab over to display the magicSquare
+            displayString += "\t"; 
             for (int j = 0; j < matrix[i].length; j++) {
                 displayString += matrix[i][j];
-                if (j < matrix[i].length - 1) {
+                if (j < matrix[i].length - 1){
                     displayString += " ";
                 }
             } 
-            if (i < matrix.length - 1) {
+            if (i < matrix.length - 1){
                 displayString += "\n";
             }
         }

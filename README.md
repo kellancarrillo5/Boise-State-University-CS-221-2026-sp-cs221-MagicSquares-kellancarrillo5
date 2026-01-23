@@ -7,14 +7,14 @@
 
 OVERVIEW:
 
- MagicSquare is a command-line based program that allows the user to check or create a magic square. With the check function, the program recieves a given file name. It then checks if the magic square is truely a magic square and returns the results to the user. Additionally the create function recieves a file name and magic number, then creating and writing the new magic square to the file.
+MagicSquare is a command-line based program that creates or checks a magic square. A (n x n) matrix of integers contains the values from 1, 2, 3, … n^2. The total of n^2 is the total sum of each of the diagonals, rows and columns. With the create function, the program receives user input specifying a file name and number(n). It then generates a file with the provided name and writes a generated magic square to the file. The check function recieves a given filename and stores the data in a 2D array. Then the 2D array is manipulated to check if it was a valid square. For both functions of the program the user is displayed the results. 
 
 
 INCLUDED FILES:
 
- * MagicSquare.java - Implements MagicSquareInterface
+ * MagicSquare.java - Implements MagicSquareInterface to read, create, evaluate and display a magic square
  * MagicSquareInterface.java - source file contaning the methods implemented in MagicSquare.java
- * MagicSquareDriver.java - Driver class, taking in 
+ * MagicSquareDriver.java - Driver class for Magic Square, takes command-line arguements to create or check magic squares
  * MagicSquareTester.java - Tester made by our instructor
  * README - this file
 
@@ -44,25 +44,10 @@ COMPILING AND RUNNING:
 
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
+MagicSquare implements MagicSquareInterface, which defines the outlining methods for the program. MagicSquare manages the set elements in the 2D array storing the magic square. The 2D array contains unique values that total to the given number, n, known as the magic number. The magic number can also be found with this equation n(n^2 + 1) / 2. Additionally all other non-implemented methods and constructors required are described in the interface description. To create a magic square we were provided the psuedo code in the project desctiption. The results from either check or create are printed to the user.   
 
- This is the sort of information someone who really wants to
- understand your program - possibly to make future enhancements -
- would want to know.
+The driver class, MagicSquareDriver, receives command line arguments. This checks whether the user asks for -check or -create. The command line arguments are verified by checking if the given number is positive and odd, the correct amount of arguments were given for check and create, and if the file name exists. If the program is used incorrectly it will display a usage statement. 
 
- Explain the main concepts and organization of your program so that
- the reader can understand how your program works. This is not a repeat
- of javadoc comments or an exhaustive listing of all methods, but an
- explanation of the critical algorithms and object interactions that make
- up the program.
-
- Explain the main responsibilities of the classes and interfaces that make
- up the program. Explain how the classes work together to achieve the program
- goals. If there are critical algorithms that a user should understand, 
- explain them as well.
- 
- If you were responsible for designing the program's classes and choosing
- how they work together, why did you design the program this way? What, if 
- anything, could be improved? 
 
 TESTING:
 
@@ -75,13 +60,13 @@ Scenarios being tested in MagicSquareTest included:
 	All methods inherited from MagicSquareInterface
     Handling exceptions being thrown
 	
-All the tests are currently passing without errors.
+All the tests are currently passing without errors. Additionally I used toString() to test make sure I was capturing the correct data periodically.  
 
 
 DISCUSSION:
  
-Starting with coding this semester was a challenge for me. I had to spend some time reviewing concepts from CS 121, however this was a good assignment to get me thinking in a coding perspective again. Coding still takes me a while because the commands aren’t easily remembered yet. However with the slides and previous example projects in 121 I was able to find examples of just what I was looking for.
+Starting with coding this semester was a challenge for me. I had to spend some time reviewing concepts from CS121, however this was a good assignment to get me thinking in a coding perspective again. Writing code still takes me awhile because the commands aren’t memorized for me yet. But with the help of the slides and previous example projects in CS121 I was able to find examples of just what I was looking for.
 
-A new concept for me was using a usage statement. Luckily the google doc linked in the project description was quite helpful. Additionally I had to google a few more examples to ensure I was writing what I intended to display. Another topic I had to google was how to append a tab space to a string. I had remembered how to get a new line, but for formatting purposes using tab was ideal. 
+A new concept for me was using a usage statement. Luckily the google doc linked in the project description was quite helpful. Additionally I had to google a few more examples to ensure I was writing what I intended to display. Another topic I had to google was how to append a tab space to a string. I had remembered how to get a new line, but for formatting purposes using tab was ideal. With a quick article on escape sequences I found a helpful example using the tab. 
 
-One major issue I discovered was with my scanners. I had closed them within where they were being used, preventing the scanners from functioning. Fixing this bug had allowed many of my failing tests to be resolved. Overall this project was a good refresher from last semester and will surely help me with specific examples in the future.
+One major issue I discovered was with my scanners. In readMatrix(), I kept recieving an error with a fileNotFoundException. As it turned out I needed to close my scanners before the exception was thrown. I had received help with this in the kount learning center, clarifying this idea for me. Overall this project was a good refresher from last semester and brought me back to how to start a project.

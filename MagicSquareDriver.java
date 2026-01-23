@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * Driver class for Magic Square, 
+ * Driver class for Magic Square, takes command-line arguements to create or check magic squares
  * 
  * @author kellancarrillo5
  */
@@ -73,7 +73,7 @@ public class MagicSquareDriver {
       }
 
     /**
-     * Prints for incorrect command line input
+     * Prints usage for incorrect command line input
      */
     private static void printUsage(){
         System.out.println("Usage:");
