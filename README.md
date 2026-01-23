@@ -15,6 +15,7 @@ INCLUDED FILES:
  * MagicSquare.java - Implements MagicSquareInterface to read, create, evaluate and display a magic square
  * MagicSquareInterface.java - source file contaning the methods implemented in MagicSquare.java
  * MagicSquareDriver.java - Driver class for Magic Square, takes command-line arguements to create or check magic squares
+ * MagicSquaresTest.java - Tester class
  * README - this file
 
 
