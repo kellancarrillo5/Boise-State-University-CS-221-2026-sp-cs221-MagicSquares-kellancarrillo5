@@ -7,7 +7,7 @@
 
 OVERVIEW:
 
-MagicSquare is a command-line based program that creates or checks a magic square. A (n x n) matrix of integers contains the values from 1, 2, 3, … n^2. The total of n^2 is the total sum of each of the diagonals, rows and columns. With the create function, the program receives user input specifying a file name and number(n). It then generates a file with the provided name and writes a generated magic square to the file. The check function recieves a given filename and stores the data in a 2D array. Then the 2D array is manipulated to check if it was a valid square. For both functions of the program the user is displayed the results. 
+MagicSquare is a command-line based program that creates or checks a magic square. A (n x n) matrix of integers contains the values from 1, 2, 3, … n^2. The total of each of the diagonals, rows and columns all equal the magic number. With the create function, the program receives user input specifying a file name and matrix length(n). It then generates a file with the provided name and writes a generated magic square to the file. The check function recieves a given filename and stores the data in a 2D array. Then the 2D array is manipulated to check if it was a valid magic square. For both functions of the program the user is displayed the results.  
 
 
 INCLUDED FILES:
@@ -44,7 +44,7 @@ COMPILING AND RUNNING:
 
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
-MagicSquare implements MagicSquareInterface, which defines the outlining methods for the program. MagicSquare manages the set elements in the 2D array storing the magic square. The 2D array contains unique values that total to the given number, n, known as the magic number. The magic number can also be found with this equation n(n^2 + 1) / 2. Additionally all other non-implemented methods and constructors required are described in the interface description. To create a magic square we were provided the psuedo code in the project desctiption. The results from either check or create are printed to the user.   
+MagicSquare implements MagicSquareInterface, which defines the outlining methods for the program. MagicSquare manages the set elements in the 2D array storing the magic square. The 2D array contains unique values that total to the given number, n, known as the magic number. The magic number can also be found with this equation n(n^2 + 1) / 2. Additionally all other non-implemented methods and constructors required are described in the interface. This includes an overloaded magic square constructor, writeMatrix(), and readMatrix(). To create the magic square constructor we were provided the psuedo code in the project desctiption. The results from either check or create are printed to the user.   
 
 The driver class, MagicSquareDriver, receives command line arguments. This checks whether the user asks for -check or -create. The command line arguments are verified by checking if the given number is positive and odd, the correct amount of arguments were given for check and create, and if the file name exists. If the program is used incorrectly it will display a usage statement. 
 

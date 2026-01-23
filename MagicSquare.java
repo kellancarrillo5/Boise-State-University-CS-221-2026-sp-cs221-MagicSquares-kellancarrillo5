@@ -22,6 +22,7 @@ public class MagicSquare implements MagicSquareInterface{
         this.matrix = readMatrix(fileName);
     }
 
+    
     /**
      * Constructor for the -create flag in the driver class, generating a magic square and writing the matrix
      * @param fileName
@@ -29,7 +30,40 @@ public class MagicSquare implements MagicSquareInterface{
      * @throws IOException 
      */
     public MagicSquare(String fileName, int dimension) throws IOException{
-        this.matrix = generateMagicSquare(dimension);
+        //written pseudo code in the project instructions
+        int n = dimension;
+        int[][] magicSquare = new int[n][n];
+
+        int row = n - 1;
+        int col = n / 2;
+        int oldRow = 0;
+        int oldCol = 0;
+
+        for(int i = 1; i <= n * n; i++){
+            magicSquare[row][col] = i;
+
+            oldRow = row;
+            oldCol = col;
+
+            row++;
+            col++;
+        
+            if (row == n){
+                row = 0;
+            }
+
+            if (col == n) {
+                col = 0;
+            }
+
+            if (magicSquare[row][col] != 0) {
+                row = oldRow;
+                col = oldCol;
+                row--;
+            }
+        } 
+
+        this.matrix = magicSquare;
         writeMatrix(matrix, fileName);  
     }
 
@@ -95,38 +129,6 @@ public class MagicSquare implements MagicSquareInterface{
         outFile.close();
     }
 
-    /**
-     * Generates a magic square with the provided int n
-     * @param n
-     * @return
-     */
-    public static int[][] generateMagicSquare(int n){
-        int[][] magicSquare = new int[n][n];
-        int num = 1;
-        int row = n - 1;
-        int col = n / 2;
-        int oldRow;
-        int oldCol;
-
-        while (num <= n * n){
-            magicSquare[row][col] = num++;
-            oldRow = row;
-            oldCol = col;
-            row++;
-            col++;
-            if (row == n){
-                row = 0;
-            }if (col == n){
-                col = 0;
-            }if (magicSquare[row][col] != 0){
-                row = oldRow - 1;
-                col = oldCol;
-                }
-        	}
-        	return magicSquare;
-
-    }
-    
 
     @Override
     public boolean isMagicSquare(){
@@ -140,8 +142,8 @@ public class MagicSquare implements MagicSquareInterface{
                 if (num < 1 || num > n * n || seen[num]){
                     return false;
                 }
-                    seen[num] = true;
-             	}
+            seen[num] = true;
+            }
         }
 
         for (int[] row : matrix){
