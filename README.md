@@ -7,7 +7,7 @@
 
 OVERVIEW:
 
- MagicSquare uses the command line to allow the user to select if they want to check
+ MagicSquare is a command-line based program that allows the user to check or create a magic square. With the check function, the program recieves a given file name. It then checks if the magic square is truely a magic square and returns the results to the user. Additionally the create function recieves a file name and magic number, then creating and writing the new magic square to the file.
 
 
 INCLUDED FILES:
@@ -44,6 +44,7 @@ COMPILING AND RUNNING:
 
 PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
+
  This is the sort of information someone who really wants to
  understand your program - possibly to make future enhancements -
  would want to know.
@@ -65,24 +66,22 @@ PROGRAM DESIGN AND IMPORTANT CONCEPTS:
 
 TESTING:
 
- How did you test your program to be sure it works and meets all of the
- requirements? What was the testing strategy? What kinds of tests were run?
- Can your program handle bad input? Is your program  idiot-proof? How do you 
- know? What are the known issues / bugs remaining in your program?
+ MagicSquareTest was my main form of testing for MagicSquare. The tester was provided correct and incorrect files to check and squares to generate. 
+
+
+Scenarios being tested in MagicSquareTest included:
+	Three incorrect files to check 
+	Three correct files to check
+	All methods inherited from MagicSquareInterface
+    Handling exceptions being thrown
+	
+All the tests are currently passing without errors.
 
 
 DISCUSSION:
  
- Discuss the issues you encountered during programming (development)
- and testing. What problems did you have? What did you have to research
- and learn on your own? What kinds of errors did you get? How did you 
- fix them?
- 
- What parts of the project did you find challenging? Is there anything
- that finally "clicked" for you in the process of working on this project?
- 
- 
-EXTRA CREDIT:
+Starting with coding this semester was a challenge for me. I had to spend some time reviewing concepts from CS 121, however this was a good assignment to get me thinking in a coding perspective again. Coding still takes me a while because the commands aren’t easily remembered yet. However with the slides and previous example projects in 121 I was able to find examples of just what I was looking for.
 
- If the project had opportunities for extra credit that you attempted,
- be sure to call it out so the grader does not overlook it.
+A new concept for me was using a usage statement. Luckily the google doc linked in the project description was quite helpful. Additionally I had to google a few more examples to ensure I was writing what I intended to display. Another topic I had to google was how to append a tab space to a string. I had remembered how to get a new line, but for formatting purposes using tab was ideal. 
+
+One major issue I discovered was with my scanners. I had closed them within where they were being used, preventing the scanners from functioning. Fixing this bug had allowed many of my failing tests to be resolved. Overall this project was a good refresher from last semester and will surely help me with specific examples in the future.

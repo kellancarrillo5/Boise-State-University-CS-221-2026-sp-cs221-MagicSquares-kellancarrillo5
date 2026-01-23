@@ -22,7 +22,7 @@ public class MagicSquare implements MagicSquareInterface{
     }
 
     /**
-     * Constructor for the -create flag in the driver class, generatign a magic square and writing the matrix
+     * Constructor for the -create flag in the driver class, generating a magic square and writing the matrix
      * @param fileName
      * @param dimension
      * @throws IOException 
